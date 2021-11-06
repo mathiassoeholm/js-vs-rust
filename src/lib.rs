@@ -24,13 +24,9 @@ pub fn count_to_10(f: &js_sys::Function) {
 pub fn md5_benchmark(f: &js_sys::Function) {
     let mut i = 1;
     loop {
-        let digest = md5::compute(format!("{}", i));
+        md5::compute(format!("{}", i));
         if i % 100000 == 0 {
-            let _ = f.call2(
-                &JsValue::null(),
-                &JsValue::from(i),
-                &JsValue::from(format!("{:x}", digest)),
-            );
+            let _ = f.call1(&JsValue::null(), &JsValue::from(i));
         }
         i += 1;
     }

@@ -6,10 +6,18 @@
   </head>
   <body>
     <script type="module">
-      const worker = new Worker("worker.js", { type: "module" });
+      const worker = new Worker("rust-worker.js", { type: "module" });
+      const rustHashes = document.querySelector("#rust-hashes");
       worker.onmessage = function (e) {
-        console.log(e.data);
+        rustHashes.textContent = e.data;
       };
     </script>
+    <h1>JS VS Rust</h1>
+    <article>
+      <h2>MD5 Hashing</h2>
+      <p>Hashing a continously increasing integer, starting at 1</p>
+      <p>Hashes made by Rust: <span id="rust-hashes">0</span></p>
+      <p>Hashes made by Rust: <span id="js-hashes">0</span></p>
+    </article>
   </body>
 </html>
