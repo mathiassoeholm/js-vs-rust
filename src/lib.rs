@@ -25,7 +25,7 @@ pub fn md5_benchmark(f: &js_sys::Function) {
     let mut i = 1;
     loop {
         md5::compute(format!("{}", i));
-        if i % 100000 == 0 {
+        if i % 1000000 == 0 {
             let _ = f.call1(&JsValue::null(), &JsValue::from(i));
         }
         i += 1;

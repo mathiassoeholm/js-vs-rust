@@ -1,0 +1,10 @@
+{
+  "name": "js-vs-rust",
+  "version": "1.0.0",
+  "repository": "git@github.com:mathiassoeholm/js-vs-rust.git",
+  "author": "Mathias Soeholm <mathiassoeholm@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "js-md5": "^0.7.3"
+  }
+}
