@@ -11,12 +11,12 @@
 
       const rustHashes = document.querySelector("#rust-hashes");
       rustWorker.onmessage = function (e) {
-        rustHashes.textContent = e.data;
+        rustHashes.textContent = e.data.toLocaleString("en-US");
       };
 
       const jsHashes = document.querySelector("#js-hashes");
       jsWorker.onmessage = function (e) {
-        jsHashes.textContent = e.data;
+        jsHashes.textContent = e.data.toLocaleString("en-US");
       };
     </script>
     <h1>JS VS Rust</h1>
