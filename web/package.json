@@ -5,6 +5,7 @@
   "author": "Mathias Soeholm <mathiassoeholm@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "js-md5": "^0.7.3"
+    "js-md5": "^0.7.3",
+    "js-vs-rust": "../rust"
   }
 }
