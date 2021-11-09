@@ -4,7 +4,13 @@
   "repository": "git@github.com:mathiassoeholm/js-vs-rust.git",
   "author": "Mathias Soeholm <mathiassoeholm@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
   "dependencies": {
+    "astro": "^0.20.12",
     "js-md5": "^0.7.3",
     "js-vs-rust": "../rust"
   }
