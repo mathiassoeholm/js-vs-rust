@@ -7,8 +7,15 @@ interface IProps {
 export function WorkerData({ workerScript }: IProps) {
   const [data, setData] = useState("");
   useEffect(() => {
-    const rustWorker = new Worker(workerScript, { type: "module" });
-    rustWorker.onmessage = function (e) {
+    // new Worker(new URL("../workers/js-worker.js", import.meta.url));
+    const worker = new Worker(
+      new URL(`../workers/${workerScript}`, import.meta.url),
+      {
+        name: "my-worker",
+        type: "module",
+      }
+    );
+    worker.onmessage = function (e) {
       setData(e.data);
     };
   }, []);

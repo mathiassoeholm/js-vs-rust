@@ -1,4 +1,5 @@
-importScripts("./node_modules/js-md5/build/md5.min.js");
+console.log("asdfsd");
+importScripts("//unpkg.com/js-md5@0.7.3");
 
 let i = 1;
 while (true) {
