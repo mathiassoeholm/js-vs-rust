@@ -7,14 +7,21 @@ console.log('See me in the Terminal')
 
 
 <html>
-  <body>
-    <h1>JS VS Rust</h1>
-    <article>
-      <h2>MD5 Hashing</h2>
-      <p>Hashing a continously increasing integer, starting at 1</p>
-      <p>Hashes made by Rust: <WorkerData client:load workerScript="rust-worker.js" type="module" /></p>
-      <p>Hashes made by JS: <WorkerData client:load workerScript="js-worker.js" /></p>
-    </article>
+  <head>
+    <link rel="stylesheet" href={Astro.resolve('../styles/global.css')}>
+  </head>
+  <body class="px-4">
+    <header class="flex justify-center">
+      <h1 class="text-5xl m-10">JS VS Rust</h1>
+    </header>
+    <div class="max-w-screen-lg mx-auto bg-gray-200 p-4">
+      <article>
+        <h2>MD5 Hashing</h2>
+        <p>Hashing a continously increasing integer, starting at 1</p>
+        <p>Hashes made by Rust: <WorkerData client:load workerScript="rust-worker.js" type="module" /></p>
+        <p>Hashes made by JS: <WorkerData client:load workerScript="js-worker.js" /></p>
+      </article>
+    </div>
   </body>
 </html>
 
