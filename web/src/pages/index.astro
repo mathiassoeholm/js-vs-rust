@@ -14,11 +14,14 @@ console.log('See me in the Terminal')
     <header class="flex justify-center">
       <h1 class="text-5xl m-10 font-black">Rust <span class="font-medium">VS</span> JS</h1>
     </header>
-      <article class="max-w-screen-lg mx-auto p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-100 to-gray-200">
-        <h2>MD5 Hashing</h2>
-        <p>Hashing a continously increasing integer, starting at 1</p>
-        <p>Hashes made by Rust: <WorkerData client:load workerScript="rust-worker.js" type="module" /></p>
-        <p>Hashes made by JS: <WorkerData client:load workerScript="js-worker.js" /></p>
+      <article class="max-w-screen-lg mx-auto p-4 rounded-lg shadow-lg bg-gradient-to-r from-gray-100 to-gray-200 flex">
+        <div class="flex-1">
+          <h2 class="text-3xl font-bold">MD5 Hashing</h2>
+          <p>Hashing a continously increasing integer, starting at 1</p>
+          <p>Hashes made by Rust: <WorkerData client:load workerScript="rust-worker.js" type="module" prettyPrintNumber /></p>
+          <p>Hashes made by JS: <WorkerData client:load workerScript="js-worker.js" prettyPrintNumber /></p>
+        </div>
+        <p class="flex flex-col justify-center items-center text-2xl"><span class="text-4xl font-bold">17%</span>faster</p>
       </article>
   </body>
 </html>

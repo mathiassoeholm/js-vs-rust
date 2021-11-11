@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 interface IProps {
   workerScript: string;
   type?: WorkerType;
+  prettyPrintNumber?: boolean;
 }
 
-export function WorkerData({ workerScript, type = "classic" }: IProps) {
+export function WorkerData({
+  workerScript,
+  type = "classic",
+  prettyPrintNumber = false,
+}: IProps) {
   const [data, setData] = useState("");
   useEffect(() => {
     const worker = new Worker(workerScript, {
@@ -17,5 +22,5 @@ export function WorkerData({ workerScript, type = "classic" }: IProps) {
     };
   }, []);
 
-  return <span>{data}</span>;
+  return <span>{prettyPrintNumber ? data.toLocaleString("en-US") : data}</span>;
 }
