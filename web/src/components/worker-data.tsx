@@ -2,19 +2,16 @@ import { useEffect, useState } from "react";
 
 interface IProps {
   workerScript: string;
+  type?: WorkerType;
 }
 
-export function WorkerData({ workerScript }: IProps) {
+export function WorkerData({ workerScript, type = "classic" }: IProps) {
   const [data, setData] = useState("");
   useEffect(() => {
-    // new Worker(new URL("../workers/js-worker.js", import.meta.url));
-    const worker = new Worker(
-      new URL(`../workers/${workerScript}`, import.meta.url),
-      {
-        name: "my-worker",
-        type: "module",
-      }
-    );
+    const worker = new Worker(workerScript, {
+      name: "my-worker",
+      type,
+    });
     worker.onmessage = function (e) {
       setData(e.data);
     };

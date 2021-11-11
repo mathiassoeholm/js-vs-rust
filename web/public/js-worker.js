@@ -1,4 +1,3 @@
-console.log("asdfsd");
 importScripts("//unpkg.com/js-md5@0.7.3");
 
 let i = 1;
