@@ -23,10 +23,11 @@ pub fn count_to_10(f: &js_sys::Function) {
 #[wasm_bindgen]
 pub fn md5_benchmark(f: &js_sys::Function) {
     let mut i = 1;
+    let null = JsValue::null();
     loop {
         md5::compute(format!("{}", i));
         if i % 1000000 == 0 {
-            let _ = f.call1(&JsValue::null(), &JsValue::from(i));
+            let _ = f.call1(&null, &null);
         }
         i += 1;
     }
