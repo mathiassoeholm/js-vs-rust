@@ -18,6 +18,16 @@ const benchmarks: Benchmark[] = [
     jsWorkerPath: "md5-js-worker.js",
     rustWorkerPath: "md5-rust-worker.js",
   },
+  {
+    title: "temp temp temp",
+    jsWorkerPath: "md5-js-worker.js",
+    rustWorkerPath: "md5-rust-worker.js",
+  },
+  {
+    title: "💩",
+    jsWorkerPath: "md5-js-worker.js",
+    rustWorkerPath: "md5-rust-worker.js",
+  },
 ];
 
 const benchmarkInfo = writable<{ [index: number]: BenchmarkInfo }>(
@@ -32,11 +42,29 @@ const updateBenchmarkForIndex =
     benchmarkInfo.update((b) => ({ ...b, [index]: { ...b[index], ...info } }));
   };
 
-function startBenchmark() {
-  benchmarks.forEach((benchmark, index) => {
+async function startBenchmark() {
+  for (let index = 0; index < benchmarks.length; index++) {
+    const benchmark = benchmarks[index];
     const update = updateBenchmarkForIndex(index);
+
     update({ status: "running" });
-  });
+
+    const profile = async (language: "js" | "rust") =>
+      await new Promise<void>((resolve) => {
+        const worker = new Worker(benchmark[`${language}WorkerPath`]);
+        worker.onmessage = (e) => {
+          const time = e.data;
+          update({ [`${language}Time`]: time });
+          worker.terminate();
+          resolve();
+        };
+      });
+
+    await profile("js");
+    await profile("rust");
+
+    update({ status: "done" });
+  }
 }
 
-export { startBenchmark, benchmarks };
+export { startBenchmark, benchmarks, benchmarkInfo };

@@ -1,10 +1,11 @@
 importScripts("//unpkg.com/js-md5@0.7.3");
 
-let i = 1;
-while (true) {
+const timeStart = Date.now();
+
+for (let i = 0; i < 1_000_000; i++) {
   md5(i.toString());
-  if (i % 1000000 == 0) {
-    postMessage(null);
-  }
-  i++;
 }
+
+const duration = Date.now() - timeStart;
+
+postMessage(duration);
