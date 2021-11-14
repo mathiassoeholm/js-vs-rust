@@ -65,6 +65,7 @@ function huffmanEncode(text) {
   console.log("text", text);
   console.log("dict", dict);
   console.log("encoded", encodedText);
+  postMessage("done");
 }
 
 onmessage = (e) => {
