@@ -1,5 +1,7 @@
 ---
-import Md5Comparison from '../components/md5-comparison.svelte'
+// import Md5Comparison from '../components/md5-comparison.svelte'
+// import HuffmanComparison from '../components/huffman-comparison.svelte'
+import Benchmark from '../components/benchmark.svelte'
 ---
 
 <html>
@@ -10,6 +12,8 @@ import Md5Comparison from '../components/md5-comparison.svelte'
     <header class="flex justify-center">
       <h1 class="text-5xl m-10 font-black">Rust <span class="font-medium">VS</span> JS</h1>
     </header>
-      <Md5Comparison client:load />
+      <!-- <Md5Comparison client:load /> -->
+      <!-- <HuffmanComparison client:load /> -->
+      <Benchmark client:load />
   </body>
 </html>

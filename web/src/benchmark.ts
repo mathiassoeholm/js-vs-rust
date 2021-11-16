@@ -4,6 +4,9 @@ interface Benchmark {
   title: string;
   jsWorkerPath: string;
   rustWorkerPath: string;
+  jsWorkerType?: WorkerType;
+  rustWorkerType?: WorkerType;
+  workerArgument?: () => Promise<any>;
 }
 
 interface BenchmarkInfo {
@@ -17,16 +20,25 @@ const benchmarks: Benchmark[] = [
     title: "Hash XXXXX string with MD5",
     jsWorkerPath: "md5-js-worker.js",
     rustWorkerPath: "md5-rust-worker.js",
+    rustWorkerType: "module",
   },
   {
-    title: "temp temp temp",
-    jsWorkerPath: "md5-js-worker.js",
-    rustWorkerPath: "md5-rust-worker.js",
+    title: "Huffman encode",
+    jsWorkerPath: "huffman-js-worker.js",
+    rustWorkerPath: "huffman-js-worker.js",
+    async workerArgument() {
+      const aliceInWonderLand = await fetch(
+        "https://gist.githubusercontent.com/phillipj/4944029/raw/75ba2243dd5ec2875f629bf5d79f6c1e4b5a8b46/alice_in_wonderland.txt"
+      ).then((res) => res.text());
+
+      return aliceInWonderLand.repeat(20);
+    },
   },
   {
     title: "💩",
     jsWorkerPath: "md5-js-worker.js",
     rustWorkerPath: "md5-rust-worker.js",
+    rustWorkerType: "module",
   },
 ];
 
@@ -49,9 +61,21 @@ async function startBenchmark() {
 
     update({ status: "running" });
 
-    const profile = async (language: "js" | "rust") =>
+    const profile = async (language: "js" | "rust") => {
+      let argument: any | undefined;
+      if (benchmark.workerArgument) {
+        await benchmark.workerArgument();
+      }
+
       await new Promise<void>((resolve) => {
-        const worker = new Worker(benchmark[`${language}WorkerPath`]);
+        const worker = new Worker(benchmark[`${language}WorkerPath`], {
+          type: benchmark[`${language}WorkerType`] ?? "classic",
+        });
+
+        if (argument) {
+          worker.postMessage(argument);
+        }
+
         worker.onmessage = (e) => {
           const time = e.data;
           update({ [`${language}Time`]: time });
@@ -59,6 +83,7 @@ async function startBenchmark() {
           resolve();
         };
       });
+    };
 
     await profile("js");
     await profile("rust");

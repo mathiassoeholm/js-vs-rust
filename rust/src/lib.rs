@@ -22,7 +22,7 @@ pub fn count_to_10(f: &js_sys::Function) {
 
 #[wasm_bindgen]
 pub fn md5_benchmark() {
-    for i in 0..1_000_000 {
+    for i in 0..10_000_000 {
         md5::compute(format!("{}", i));
     }
 }
